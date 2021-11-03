@@ -1,0 +1,13 @@
+.vscode/
+
+__pycache__/
+
+# Flask
+instance/
+.webassets-cache
+
+#Environments
+.env
+.venv
+env/
+venv/
