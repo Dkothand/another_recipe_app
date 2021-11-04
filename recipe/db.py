@@ -30,6 +30,13 @@ def init_db():
         db.executescript(f.read().decode('utf8'))
 
 
+def seed_db():
+    db = get_db()
+
+    with current_app.open_resource('seed.sql') as f:
+        db.executescript(f.read().decode('utf-8'))
+
+
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
@@ -38,6 +45,15 @@ def init_db_command():
     click.echo('Initialized the database.')
 
 
+@click.command('seed-db')
+@with_appcontext
+def seed_db_command():
+    """ Populate database with seed data """
+    seed_db()
+    click.echo('Seeded database')
+
+
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(seed_db_command)
