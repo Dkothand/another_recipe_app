@@ -20,18 +20,12 @@ CREATE TABLE ingredients (
     name TEXT NOT NULL
 );
 
-CREATE TABLE meals (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT CHECK (name IN ('GENERAL', 'BREAKFAST', 'LUNCH', 'DINNER')) DEFAULT 'GENERAL'
-);
-
 CREATE TABLE recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT UNIQUE NOT NULL,
     description TEXT,
     instructions TEXT,
-    meal_id INTEGER,
-    FOREIGN KEY (meal_id) REFERENCES meals (id)
+    meal TEXT CHECK (meal IN ('GENERAL', 'BREAKFAST', 'LUNCH', 'DINNER')) DEFAULT 'GENERAL'
 );
 
 CREATE TABLE recipe_ingredients (
