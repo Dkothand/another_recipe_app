@@ -3,7 +3,6 @@ DROP TABLE IF EXISTS recipe_ingredients;
 DROP TABLE IF EXISTS measurement_quantities;
 DROP TABLE IF EXISTS measurement_units;
 DROP TABLE IF EXISTS ingredients;
-DROP TABLE IF EXISTS meals;
 
 CREATE TABLE measurement_quantities (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
