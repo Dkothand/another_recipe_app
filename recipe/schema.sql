@@ -30,8 +30,8 @@ CREATE TABLE recipes (
 CREATE TABLE recipe_ingredients (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     recipe_id INTEGER NOT NULL,
-    measurement_quantity_id INTEGER NOT NULL,
-    measurement_unit_id INTEGER NOT NULL,
+    measurement_quantity_id INTEGER,
+    measurement_unit_id INTEGER,
     ingredient_id INTEGER NOT NULL,
     FOREIGN KEY (recipe_id) REFERENCES recipes (id),
     FOREIGN KEY (measurement_quantity_id) REFERENCES measurement_quantities (id),
