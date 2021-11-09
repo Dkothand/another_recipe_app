@@ -1,6 +1,7 @@
 import os
 
-from flask import Flask
+from flask import Flask, redirect
+from flask.helpers import url_for
 from . import db, recipe
 
 
@@ -29,7 +30,9 @@ def create_app(test_config=None):
 
     @app.route('/')
     def index():
-        return "<h1>Recipe Landing Page</h1>"
+        # res = db.query_db("SELECT * FROM recipes;")
+        # return res
+        return redirect(url_for('recipe.recipe'))
 
     db.init_app(app)
 

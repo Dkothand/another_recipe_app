@@ -1,8 +1,15 @@
 import sqlite3
 
 import click
-from flask import current_app, g
+from flask import current_app, g, jsonify
 from flask.cli import with_appcontext
+
+
+def make_dicts(cursor, row):
+    return dict(
+        (cursor.description[idx][0], value)
+        for idx, value in enumerate(row)
+    )
 
 
 def get_db():
@@ -11,7 +18,7 @@ def get_db():
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES
         )
-        g.db.row_factory = sqlite3.Row
+        g.db.row_factory = make_dicts
 
     return g.db
 
@@ -21,6 +28,14 @@ def close_db(e=None):
 
     if db is not None:
         db.close()
+
+
+def query_db(query, args=(), one=False):
+    cur = get_db().execute(query, args)
+    rv = cur.fetchall()
+    cur.close()
+    res = (rv[0] if rv else None) if one else rv
+    return jsonify(res)
 
 
 def init_db():
