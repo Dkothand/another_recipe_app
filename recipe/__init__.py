@@ -26,12 +26,8 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-
     @app.route('/')
     def index():
-        # res = db.query_db("SELECT * FROM recipes;")
-        # return res
         return redirect(url_for('recipe.recipe'))
 
     db.init_app(app)
